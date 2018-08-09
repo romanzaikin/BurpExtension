@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Crypto.Cipher import AES
 from google.protobuf import json_format
 
@@ -166,7 +167,7 @@ class WhatsAppWebClient(object):
         # Fix protobuf manually
         # TODO:// fix the whatsapp_write code, seems that there is a bug somewhere...
         char_diff = len(output) - len(self.original)
-        print "ENCRYPTED DIFF: {}".format(char_diff)
+        print("ENCRYPTED DIFF: {}".format(char_diff))
 
         output[9] += char_diff
         output[16] += char_diff
@@ -186,8 +187,8 @@ error_codes = {
     5: "Can't encrypt the outgoing message, something wrong with the data."
 }
 
-print "Waiting for connection"
-print """
+print("Waiting for connection")
+print("""
 
 Dikla Barda:
     Linkedin - https://www.linkedin.com/in/diklabarda/ 
@@ -197,11 +198,11 @@ Roman Zaikin:
     Linkedin - https://www.linkedin.com/in/romanzaikin/
     Twitter -  https://twitter.com/R0m4nZ41k1n
     
-"""
+""")
 
 while True:
     data, client = server.recvfrom(4096)
-    print "connection received from client {0}".format(client)
+    print("connection received from client {0}".format(client))
 
     try:
         data = json.loads(data)
@@ -226,7 +227,7 @@ while True:
             try:
                 # fix len
                 decrypted_message = wb.decrypt_incoming_message(data["data"]["msg"])
-                print "DECRYPTED: ", len(str(decrypted_message).replace("u'","'"))
+                print("DECRYPTED: ", len(str(decrypted_message).replace("u'","'")))
 
             except Exception as e:
                 server.sendto(json.dumps({"status": 2, "data": error_codes[2]}), client)
@@ -251,12 +252,12 @@ while True:
                 #TODO:// The problem is that we have (false,true) in it...
 
                 received_unencrypted = ast.literal_eval(data["data"]["msg"].replace("false","False").replace("true","True"))
-                print "ENCRYPTED: ", len(str(received_unencrypted))
+                print("ENCRYPTED: ", len(str(received_unencrypted)))
 
                 char_diff = len(str(received_unencrypted)) - len(str(decrypted_message).replace("u'","'"))
                 encrypted_message = wb.encrypt_incoming_message(received_unencrypted, char_diff)
             except Exception as e:
-                print e
+                print(e)
                 server.sendto(json.dumps({"status": 3, "data": error_codes[3]}), client)
             else:
                 server.sendto(json.dumps({"status": 0, "data": encrypted_message}), client)
@@ -269,7 +270,7 @@ while True:
                 received_unencrypted = ast.literal_eval(data["data"]["msg"].replace("false","False").replace("true","True"))
                 encrypted_message = wb.encrypt_out_going(received_unencrypted, 0)
             except Exception as e:
-                print e
+                print(e)
                 server.sendto(json.dumps({"status": 5, "data": error_codes[5]}), client)
             else:
                 server.sendto(json.dumps({"status": 0, "data": encrypted_message}), client)
