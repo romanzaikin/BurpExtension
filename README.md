@@ -27,16 +27,12 @@ Twitter -  https://twitter.com/R0m4nZ41k1n
 Dependences:
 ---------------
 
-1) download python 2.7 at https://www.python.org/downloads/release/python-2715/
-2) download pip at https://pip.pypa.io/en/stable/installing/
-
-3) execute the command `pip install protobuf`
-
+1) download Python 2.7 at https://www.python.org/downloads/release/python-2715/
+2) execute the command `python2 -m ensurepip --upgrade`
+3) execute the command `python2 -m pip install protobuf pycrypto`
 4) download Microsoft Visual C++ Compiler for Python 2.7 at https://www.microsoft.com/en-us/download/confirmation.aspx?id=44266
-5) execute the command `pip install pycrypto`
-
-6) copy `stdint.h` to `C:\Users\Administrator\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\VC\include`
-7) execute the command `pip install curve25519-donna`
+5) copy `stdint.h` to `C:\Users\Administrator\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\VC\include`
+6) execute the command `python2 -m pip install curve25519-donna`
 
 
 About the extension
@@ -44,8 +40,8 @@ About the extension
 
 This extension allow you to view and manipulate the actual data that sent via whatsapp.
 
-1) First you have to run the `parser.py` file (which is in helper dir).
-2) Second you have to add the file `burpWhatsapp.py` to your burpsuit extensions.
+1) Run the `parser.py` file (which is in helper dir).
+2) Add the file `burpWhatsapp.py` to your burpsuit extensions.
 
 
 Functionality
@@ -56,7 +52,7 @@ Functionality
 3) Decrypt outgoing data, to decrypt outgoing data you have to take it from `AesCbcEncrypt` function in list format.
 4) Encrypt outgoing data, after the extension encrypt the data back you have to put it back via the console.
 
-you can use the following helper function to do that:
+you can do that using the following helper function:
 
 ```
 function str2unit8(str) {
@@ -73,8 +69,5 @@ function str2unit8(str) {
 TO-DO
 ---------------
 
-The extension currently can decrypt and encrypt only the message related functionality, in order to add more function you have to map the protobuf
+- [ ] The extension currently can decrypt and encrypt only the message related functionality, in order to add more function you have to map the protobuf
 and add it to our protobuf file.
-
-
-
