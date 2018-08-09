@@ -1,3 +1,4 @@
+from __future__ import print_function
 from burp import IBurpExtender, ITab
 from javax.swing import JPanel, JTextArea, JTextField, JLabel, JButton, BorderFactory, SwingConstants
 from java.awt import GridBagLayout, GridBagConstraints, BorderLayout, Color, Font
@@ -183,7 +184,7 @@ class BurpExtender(IBurpExtender, ITab):
                 serverData = json.loads(serverData)
 
                 if serverData["status"] == 0:
-                    print serverData
+                    print(serverData)
                     self.messageField.setText(json.dumps(serverData["data"]))
                     self.statusActField.setForeground(Color.GREEN)
                     self.statusActField.setText("OK")

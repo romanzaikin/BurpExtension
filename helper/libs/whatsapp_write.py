@@ -1,3 +1,4 @@
+from __future__ import print_function
 from google.protobuf import json_format
 from math import ceil, floor
 from whatsapp_pb2 import WebMessageInfo
@@ -175,7 +176,7 @@ class WhatsAppWriter:
     def pack_hex(self, value):
 
         if "0" <= value <= "9" or "A" <= value <= "F":
-            print int(value, 16)
+            print(int(value, 16))
 
         elif value == "\0":
             return 15
@@ -233,7 +234,7 @@ class WhatsAppWriter:
                 self.data = [ord(x) for x in self.original_data[:12]]
 
                 # TODO:// check if there is a positive/negative overflow and fix it
-                print "CHARACTERS LENGTH BEFORE FIX: ", self.data[11]
+                print("CHARACTERS LENGTH BEFORE FIX: ", self.data[11])
 
                 self.data[11] += self.character_difference  # modify the characters difference
 
