@@ -17,7 +17,7 @@ class BurpExtender(IBurpExtender, ITab):
         self.helpers = callbacks.getHelpers()
         callbacks.setExtensionName("WhatsApp Decoder")
 
-        self.banner = JLabel("WHATSAPP DECRYPTION AND ENCRYPTION EXTENSION BY DIKLA BARDA, ROMAN ZAIKIN", SwingConstants.CENTER)
+        self.banner = JLabel("WHATSAPP DECRYPTION AND ENCRYPTION EXTENSION BY DIKLA BARDA, ROMAN ZAIKIN - Translated by Moltivie", SwingConstants.CENTER)
         self.banner.setFont(Font("Serif", Font.PLAIN, 17))
         self.banner.setBorder(BorderFactory.createLineBorder(Color.BLACK))
 
