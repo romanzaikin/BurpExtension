@@ -17,26 +17,26 @@ class BurpExtender(IBurpExtender, ITab):
         self.helpers = callbacks.getHelpers()
         callbacks.setExtensionName("WhatsApp Decoder")
 
-        self.banner = JLabel("WHATSAPP DECRYPTION AND ENCRYPTION EXTENSION BY DIKLA BARDA, ROMAN ZAIKIN", SwingConstants.CENTER)
+        self.banner = JLabel("WHATSAPP DECRYPTION AND ENCRYPTION EXTENSION BY DIKLA BARDA, ROMAN ZAIKIN - Translated by Moltivie", SwingConstants.CENTER)
         self.banner.setFont(Font("Serif", Font.PLAIN, 17))
         self.banner.setBorder(BorderFactory.createLineBorder(Color.BLACK))
 
-        self.statusConn = JLabel("CONNECTION STATUS:  ")
-        self.statusConnField = JLabel("NOT CONNECTED")
-        self.statusAct = JLabel("ACTION STATUS:      ")
+        self.statusConn = JLabel("STATO DI CONNESSIONE:  ")
+        self.statusConnField = JLabel("NON CONNESSO")
+        self.statusAct = JLabel("STATO:      ")
         self.statusActField = JLabel("OK")
 
         self.ref = JLabel("Ref object:  ")
         self.refField = JTextField("123", 80)
-        self.refField.setToolTipText("Copy the Ref from burpsuit WebSocket, make sure that the parameter 'secret' is there and you copy only the 'ref' without the connection and other data, if not logout from your whatsapp web and login again.")
+        self.refField.setToolTipText("Copia il Ref dal WebSocket di burpsuit, assicurati che il parametro 'secret' sia presente e che tu copia solo il 'ref' senza connessione o altri dati, se no disconnettiti da whatsapp web e riconnettiti.")
 
         self.privateKey = JLabel("Private Key:")
         self.privateKeyField = JTextField("123", 80)
-        self.privateKeyField.setToolTipText("Copy the private key list from your whatsapp web according to our blog post ")
+        self.privateKeyField.setToolTipText("Copia la chiave private da whatsapp web secondo quanto scritto nel nostro post")
 
         self.publicKey = JLabel("Public Key: ")
         self.publicKeyField = JTextField("123", 80)
-        self.publicKeyField.setToolTipText("Copy the public key list from your whatsapp web according to our blog post")
+        self.publicKeyField.setToolTipText("Copia la chiave pubblica da whatsapp web secondo quanto scritto nel nostro post")
 
         self.statusPanel1 = JPanel()
         self.statusPanel1.add(self.statusConn)
@@ -60,7 +60,7 @@ class BurpExtender(IBurpExtender, ITab):
 
         self.messageField = JTextArea("", 5, 90)
         self.messageField.setLineWrap(True)
-        self.messageField.setToolTipText("If you putting in the incoming traffic you can copy it from burp suit, the outgoing is the list from aesCbcEncrypt")
+        self.messageField.setToolTipText("Se immetti il traffico in entrata puoi copiarlo da burp suit, il traffico in'uscita e' una lista di aesCbcEncrypt")
 
         self.whatsAppMessagesPanel = JPanel()
         self.whatsAppMessagesPanel.add(self.messageField)
@@ -217,7 +217,7 @@ class BurpExtender(IBurpExtender, ITab):
                     self.statusActField.setText("OK")
                 else:
                     self.statusActField.setForeground(Color.RED)
-                    self.statusActField.setText("Error: {}".format(json.dumps(serverData["data"])))
+                    self.statusActField.setText("Errore: {}".format(json.dumps(serverData["data"])))
 
             except socket.timeout:
                 pass
@@ -251,18 +251,18 @@ class BurpExtender(IBurpExtender, ITab):
             serverData, addr = self.client.recvfrom(2048)
             print (serverData)
 
-            self.statusConnField.setText("CONNECTED")
+            self.statusConnField.setText("CONNESSO")
             self.statusActField.setForeground(Color.GREEN)
             self.statusActField.setText("OK")
 
         except socket.timeout:
             self.statusActField.setForeground(Color.RED)
-            self.statusActField.setText("Error: Can't connect to the local server make sure parser.py is running!")
+            self.statusActField.setText("Errore: Non e' possibile connettersi alla rete locale, assicurati che parser.py sia in esecuzione!")
             pass
 
         except Exception as e:
             self.statusActField.setForeground(Color.RED)
-            self.statusActField.setText("Error: make Sure the ref is a correct json!")
+            self.statusActField.setText("Errore: assicurati che ref sia un file json valido!")
 
         self.client.close()
 
@@ -270,7 +270,7 @@ class BurpExtender(IBurpExtender, ITab):
         self.refField.setText("")
         self.privateKeyField.setText("")
         self.publicKeyField.setText("")
-        self.statusConnField.setText("NOT CONNECTED")
+        self.statusConnField.setText("NON CONNESSO")
         self.statusActField.setText("OK")
         self.messageField.setText("")
 
